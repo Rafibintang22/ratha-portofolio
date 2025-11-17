@@ -17,32 +17,32 @@ function Work() {
         {
             title: "Flood Control Application System",
             category: "Web Development",
-            image: "/works/sipbanja/sipbanja2-map.png",
+            image: "/works/sipbanja/sipbanja2-map.webp",
         },
         {
             title: "Multilink Company Website",
             category: "Web Development",
-            image: "/works/multilink/multilink.png",
+            image: "/works/multilink/multilink.webp",
         },
         {
             title: "HmpsArs Website",
             category: "Web Development",
-            image: "/works/hmpsars/hmpsars.png",
+            image: "/works/hmpsars/hmpsars.webp",
         },
         {
             title: "Airwende Company Website",
             category: "UI/UX Design",
-            image: "/works/airwende/Airwende.png",
+            image: "/works/airwende/Airwende.webp",
         },
         {
             title: "The Jarrdin Member Web App",
             category: "Web Development",
-            image: "/works/jarrdin/jarrdin-member.png",
+            image: "/works/jarrdin/jarrdin-member.webp",
         },
         {
             title: "Point Of Sales",
             category: "UI/UX Design",
-            image: "/works/pos/PointOfSales.jpg",
+            image: "/works/pos/PointOfSales.webp",
         },
     ];
 
@@ -124,7 +124,7 @@ function Work() {
                     <div className="flex flex-col px-5 py-3 min-w-[55%] justify-end relative">
                         <div className="absolute translate-x-2 md:-translate-x-5 lg:-translate-x-8 w-full h-[350px] md:h-[420px]">
                             <Image
-                                src={"/works/jarrdin/webJarrdin.png"}
+                                src={"/works/jarrdin/webJarrdin.webp"}
                                 alt="Laptop Jarrdin"
                                 fill
                                 className={`object-contain transition-all duration-2000

@@ -28,7 +28,7 @@ export default function ScrollToTop() {
             ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         >
             <Image
-                src="/icons8-arrow-up-apple-sf-black-filled-96.png"
+                src="https://img.icons8.com/sf-black-filled/64/f78d60/up.png"
                 alt="go-up"
                 width={28}
                 height={28}

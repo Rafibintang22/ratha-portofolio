@@ -140,7 +140,7 @@ export default function Expertise() {
                         }`}
                     >
                         <Image
-                            src={"/code.png"}
+                            src={"/code.webp"}
                             alt="code-bg"
                             width={800}
                             height={300}

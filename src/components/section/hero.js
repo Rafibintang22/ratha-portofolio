@@ -46,7 +46,7 @@ export default function Hero() {
                 <div className="relative transition-transform duration-300">
                     <Image
                         style={{ transform: `scale(${scale})` }}
-                        src="/cube.png"
+                        src="/cube.webp"
                         alt="Hero 3D Cubes"
                         width={500}
                         height={900}

@@ -9,7 +9,7 @@ function Header() {
         { no: 1, title: "// home", link: "/#home" },
         { no: 2, title: "// expertise", link: "/#expertise" },
         { no: 3, title: "// work", link: "/#work" },
-        { no: 4, title: "// experince", link: "/#experince" },
+        { no: 4, title: "// experience", link: "/#experience" },
         { no: 5, title: "// contact", link: "/#contact" },
     ];
     const [open, setOpen] = useState(false);
@@ -44,7 +44,7 @@ function Header() {
                     <Link href="/" className="flex items-center gap-2">
                         <Image
                             className="hover:opacity-80"
-                            src="/Ratha.png"
+                            src="/Ratha.webp"
                             alt="Logo"
                             width={160}
                             height={40}
