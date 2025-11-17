@@ -1,10 +1,14 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import Pagination from "./pagination";
+import { Pagination } from "../global";
 
 function Work() {
     const [visible, setVisible] = useState(false);
+    const headWorkRef = useRef(null);
+    const [visibleAllWorks, setVisibleAllWorks] = useState(false);
+    const allWorksRef = useRef(null);
+
     const [activeCategory, setActiveCategory] = useState("All");
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -13,74 +17,51 @@ function Work() {
         {
             title: "Flood Control Application System",
             category: "Web Development",
-            image: "/sipbanja2-map.png",
+            image: "/works/sipbanja/sipbanja2-map.png",
         },
         {
             title: "Multilink Company Website",
             category: "Web Development",
-            image: "/multilink.png",
+            image: "/works/multilink/multilink.png",
         },
         {
             title: "HmpsArs Website",
             category: "Web Development",
-            image: "/hmpsars.png",
+            image: "/works/hmpsars/hmpsars.png",
         },
         {
             title: "Airwende Company Website",
             category: "UI/UX Design",
-            image: "/Airwende.png",
+            image: "/works/airwende/Airwende.png",
         },
         {
             title: "The Jarrdin Member Web App",
             category: "Web Development",
-            image: "/jarrdin-member.png",
+            image: "/works/jarrdin/jarrdin-member.png",
         },
         {
             title: "Point Of Sales",
             category: "UI/UX Design",
-            image: "/PointOfSales.jpg",
-        },
-        {
-            title: "Point Of Sales",
-            category: "UI/UX Design",
-            image: "/PointOfSales.jpg",
-        },
-        {
-            title: "Point Of Sales",
-            category: "UI/UX Design",
-            image: "/PointOfSales.jpg",
-        },
-        {
-            title: "Point Of Sales",
-            category: "UI/UX Design",
-            image: "/PointOfSales.jpg",
-        },
-        {
-            title: "Point Of Sales",
-            category: "UI/UX Design",
-            image: "/PointOfSales.jpg",
-        },
-        {
-            title: "Point Of Sales",
-            category: "UI/UX Design",
-            image: "/PointOfSales.jpg",
+            image: "/works/pos/PointOfSales.jpg",
         },
     ];
 
-    // Pagination setup
-    const rowsPerPage = 6;
-    const totalRows = works.length;
-    const startIndex = (currentPage - 1) * rowsPerPage;
-    const paginatedData = works.slice(startIndex, startIndex + rowsPerPage);
+    // FILTERING
+    const filteredWorks =
+        activeCategory === "All" ? works : works.filter((w) => w.category.includes(activeCategory));
 
-    const sectionRef = useRef(null);
+    // PAGINATION
+    const rowsPerPage = 6;
+    const totalRows = filteredWorks.length;
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const paginatedData = filteredWorks.slice(startIndex, startIndex + rowsPerPage);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setVisible(true);
-                    observer.unobserve(sectionRef.current); // trigger sekali saja
+                    observer.unobserve(headWorkRef.current); // trigger sekali saja
                 }
             },
             {
@@ -88,16 +69,31 @@ function Work() {
             }
         );
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
+        if (headWorkRef.current) {
+            observer.observe(headWorkRef.current);
         }
 
         return () => observer.disconnect();
     }, []);
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setVisibleAllWorks(true);
+                    observer.unobserve(allWorksRef.current);
+                }
+            },
+            { threshold: 0.2 }
+        );
+
+        if (allWorksRef.current) observer.observe(allWorksRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <>
-            <section id="work" ref={sectionRef} className="px-8 mt-6 mb-6">
+            <section id="work" ref={headWorkRef} className="px-8 mt-6 mb-6">
                 <div className="flex flex-wrap md:flex-nowrap relative mx-auto max-w-[1240px]">
                     <div className="min-w-[45%]">
                         <div className="flex flex-col">
@@ -128,7 +124,7 @@ function Work() {
                     <div className="flex flex-col px-5 py-3 min-w-[55%] justify-end relative">
                         <div className="absolute translate-x-2 md:-translate-x-5 lg:-translate-x-8 w-full h-[350px] md:h-[420px]">
                             <Image
-                                src={"/webJarrdin.png"}
+                                src={"/works/jarrdin/webJarrdin.png"}
                                 alt="Laptop Jarrdin"
                                 fill
                                 className={`object-contain transition-all duration-2000
@@ -168,7 +164,13 @@ function Work() {
                     </div>
                 </div>
             </section>
-            <section id="all-works" className="px-8 mt-20 mb-6">
+            <section
+                id="all-works"
+                ref={allWorksRef}
+                className={`px-8 mt-20 mb-6 transition-all duration-1000 ${
+                    visibleAllWorks ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+            >
                 <div className="flex flex-col relative mx-auto max-w-[1240px]">
                     <div className="container-filter-works flex gap-2 md:gap-5 items-start w-full font-sans text-gray-400 text-sm md:text-base whitespace-nowrap">
                         <div>Filter by</div>
@@ -188,8 +190,12 @@ function Work() {
                                             onClick={() => setActiveCategory(category)}
                                         >
                                             {category}
-                                            <span className="block text-[12px] text-end transition-all">
-                                                {index + 5}
+                                            <span className="text-[12px] opacity-60">
+                                                {category === "All"
+                                                    ? works.length
+                                                    : works.filter((w) =>
+                                                          w.category.includes(category)
+                                                      ).length}
                                             </span>
                                         </span>
                                         {index < categorys.length - 1 && <span>/</span>}
@@ -199,13 +205,18 @@ function Work() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10`}>
                         {paginatedData.map((work, i) => {
                             if (i < 3) {
                                 return (
                                     <div
                                         key={i}
-                                        className="group cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:border-[var(--primary-color)]"
+                                        className={`group cursor-pointer overflow-hidden rounded-lg transition-all duration-1000 hover:border-[var(--primary-color)] ${
+                                            visibleAllWorks
+                                                ? "opacity-100 translate-y-0"
+                                                : "opacity-0 translate-y-4"
+                                        }`}
+                                        style={{ transitionDelay: `${i * 300}ms` }}
                                     >
                                         <div className="relative w-full h-52 overflow-hidden rounded-t-lg">
                                             <Image
@@ -243,9 +254,14 @@ function Work() {
                                 <div
                                     key={i}
                                     className={`
-                                        group cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:border-[var(--primary-color)]
+                                        group cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:border-[var(--primary-color)] ${
+                                            visibleAllWorks
+                                                ? "opacity-100 translate-y-0"
+                                                : "opacity-0 translate-y-4"
+                                        }
                                         ${large ? "lg:col-span-2 lg:row-span-2" : ""}
                                     `}
+                                    style={{ transitionDelay: `${i * 300}ms` }}
                                 >
                                     <div
                                         className={`relative w-full ${

@@ -1,4 +1,5 @@
-import { Header, Hero, ScrollToTop, Expertise, Work } from "@/components";
+import { ScrollToTop } from "@/components/global";
+import { Header, Hero, Expertise, Work } from "@/components/section";
 
 export default function Home() {
     return (
