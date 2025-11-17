@@ -174,7 +174,7 @@ function Work() {
                 <div className="flex flex-col relative mx-auto max-w-[1240px]">
                     <div className="container-filter-works flex gap-2 md:gap-5 items-start w-full font-sans text-gray-400 text-sm md:text-base whitespace-nowrap">
                         <div>Filter by</div>
-                        <div className="flex gap-3">
+                        <div className="flex flex-wrap md:flex-nowrap gap-3">
                             {categorys.map((category, index) => (
                                 <div
                                     key={index}
