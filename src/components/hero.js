@@ -54,7 +54,7 @@ export default function Hero() {
                         priority
                     />
 
-                    <div className="absolute left-1/2 -translate-x-1/2 bottom-[-50px] w-[140%] h-[60px] rounded-full blur-[60px] bg-[#f78d60] opacity-25"></div>
+                    <div className="absolute left-1/2 -translate-x-1/2 bottom-[-50px] w-[140%] h-[60px] rounded-full blur-[60px] bg-[var(--secondary-color)] opacity-25"></div>
                 </div>
             </div>
 

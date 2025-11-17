@@ -3,6 +3,10 @@
 :root {
     --background: #0b0f1a;
     --foreground: #ffffff;
+    --primary-color: #ea2264;
+    --secondary-color: #f78d60;
+    --hint-color1: #0d1164;
+    --hint-color2: #640d5f;
 
     /* Font hasil from next/font/google */
     --font-header: "Poppins";

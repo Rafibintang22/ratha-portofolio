@@ -21,9 +21,9 @@ export default function Expertise() {
         },
         {
             icon: "https://img.icons8.com/ios/100/FFFFFF/windows10-personalization.png",
-            title1: "UI/UX Design",
-            title2: "Figma",
-            desc: "Focused on clean, user-friendly designs, intuitive flows, and efficient prototyping in Figma.",
+            title1: "UI/UX & Digital",
+            title2: "Design",
+            desc: "Designing user-focused interfaces and visuals, from intuitive flows to polished mockups and brand assets — using Figma, Photoshop, and Illustrator.",
             color: "#ffcc00",
         },
     ];
@@ -105,7 +105,7 @@ export default function Expertise() {
 
                                     <div className="absolute top-1/2 left-5 w-[1px] h-[80%] bg-white/30 -translate-y-1/2"></div>
 
-                                    <p className="text-base md:text-md leading-relaxed w-55">
+                                    <p className="text-base md:text-md leading-relaxed w-55 max-w-full">
                                         {expertise.desc}
                                     </p>
 

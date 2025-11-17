@@ -122,7 +122,7 @@ function Header() {
                                 className={`
                                 text-center cursor-pointer relative transition-all ease-in-out duration-300
                                 opacity-100 group-hover:opacity-40   
-                                hover:opacity-100 hover:scale-105 text-[#ea2264]`}
+                                hover:opacity-100 hover:scale-105 text-[var(--primary-color)]`}
                             >
                                 <span className="block text-[10px] opacity-60 mb-0.5 text-end transition-all">
                                     0{m.no}
