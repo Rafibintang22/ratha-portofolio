@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Pagination } from "../global";
+import { workDetails } from "@/data/workDetails";
 
 function Work() {
     const [visible, setVisible] = useState(false);
@@ -12,38 +14,15 @@ function Work() {
     const [activeCategory, setActiveCategory] = useState("All");
     const [currentPage, setCurrentPage] = useState(1);
 
-    const categorys = ["All", "Web Development", "Design"];
-    const works = [
-        {
-            title: "Flood Control Application System",
-            category: "Web Development",
-            image: "/works/sipbanja/sipbanja2-map.webp",
-        },
-        {
-            title: "Multilink Company Website",
-            category: "Web Development",
-            image: "/works/multilink/multilink.webp",
-        },
-        {
-            title: "HmpsArs Website",
-            category: "Web Development",
-            image: "/works/hmpsars/hmpsars.webp",
-        },
-        {
-            title: "Airwende Company Website",
-            category: "UI/UX Design",
-            image: "/works/airwende/Airwende.webp",
-        },
-        {
-            title: "The Jarrdin Member Web App",
-            category: "Web Development",
-            image: "/works/jarrdin/jarrdin-member.webp",
-        },
-        {
-            title: "Point Of Sales",
-            category: "UI/UX Design",
-            image: "/works/pos/PointOfSales.webp",
-        },
+    const works = workDetails.map(({ title, category, images, slug }) => ({
+        title,
+        category,
+        image: images?.[0] ?? "/works/placeholder.webp",
+        slug,
+    }));
+    const categorys = [
+        "All",
+        ...Array.from(new Set(workDetails.map((work) => work.category || "Other"))),
     ];
 
     // FILTERING
@@ -154,13 +133,14 @@ function Work() {
                             The Jarrdin Member <br /> Web Application
                         </div>
 
-                        <button
-                            className={`cursor-pointer bg-[var(--secondary-color)] px-3 py-2 w-50 mt-5
+                        <Link
+                            href={"/work/jarrdin"}
+                            className={`cursor-pointer bg-[var(--secondary-color)] px-3 py-2 w-50 mt-5 text-center font-semibold
                         transition-all duration-1000 ease-out delay-700
                         ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                         >
                             View Project
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -209,16 +189,17 @@ function Work() {
                         {paginatedData.map((work, i) => {
                             if (i < 3) {
                                 return (
-                                    <div
-                                        key={i}
-                                        className={`group cursor-pointer overflow-hidden rounded-lg transition-all duration-1000 hover:border-[var(--primary-color)] ${
+                                    <Link
+                                        href={`/work/${work.slug}`}
+                                        key={work.slug}
+                                        className={`group block overflow-hidden rounded-lg transition-all duration-1000 hover:border-[var(--primary-color)] ${
                                             visibleAllWorks
                                                 ? "opacity-100 translate-y-0"
                                                 : "opacity-0 translate-y-4"
                                         }`}
                                         style={{ transitionDelay: `${i * 300}ms` }}
                                     >
-                                        <div className="relative w-full h-52 overflow-hidden rounded-t-lg">
+                                        <div className="relative h-52 w-full overflow-hidden rounded-t-lg">
                                             <Image
                                                 src={work.image}
                                                 alt={work.title}
@@ -241,7 +222,7 @@ function Work() {
                                                 </span>
                                             </p>
                                         </div>
-                                    </div>
+                                    </Link>
                                 );
                             }
 
@@ -251,10 +232,11 @@ function Work() {
                             const large =
                                 largePattern.includes(j % 4) || largePattern.includes(j % 7);
                             return (
-                                <div
-                                    key={i}
+                                <Link
+                                    href={`/work/${work.slug}`}
+                                    key={work.slug}
                                     className={`
-                                        group cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:border-[var(--primary-color)] ${
+                                        group block overflow-hidden rounded-lg transition-all duration-300 hover:border-[var(--primary-color)] ${
                                             visibleAllWorks
                                                 ? "opacity-100 translate-y-0"
                                                 : "opacity-0 translate-y-4"
@@ -291,7 +273,7 @@ function Work() {
                                             </span>
                                         </p>
                                     </div>
-                                </div>
+                                </Link>
                             );
                         })}
                     </div>
